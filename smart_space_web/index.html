@@ -34,39 +34,39 @@
     </div>
     <script type="text/javascript">
         mapboxgl.accessToken = 'pk.eyJ1IjoiYmlhYm9ibyIsImEiOiJjamVvejdlNXQxZnBuMndtdWhiZHRuaTNpIn0.PIS9wtUxm_rz_IzF2WFD1g';
-        var chart1 = echarts.init(document.getElementById('chart1'));
-        var chart2 = echarts.init(document.getElementById('chart2'));
-        var chart3 = echarts.init(document.getElementById('chart3'));
-        var chart4 = echarts.init(document.getElementById('chart4'));
-        var chart5 = echarts.init(document.getElementById('chart5'));
+        const chart1 = echarts.init(document.getElementById('chart1'));
+        const chart2 = echarts.init(document.getElementById('chart2'));
+        const chart3 = echarts.init(document.getElementById('chart3'));
+        const chart4 = echarts.init(document.getElementById('chart4'));
+        const chart5 = echarts.init(document.getElementById('chart5'));
 
-        var currentCoord = [25.043178, 121.533992];
-        var currentZoom = 17;
-        var currentPitch = 60;
-        var labels = ['data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'data7', 'data8', 'data9', 'data10'];
-        var bar3DData = createRandomBar3DData();
+        const currentCoord = [25.043178, 121.533992];
+        const currentZoom = 17;
+        const currentPitch = 60;
+        const labels = ['data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'data7', 'data8', 'data9', 'data10'];
+        const bar3DData = createRandomBar3DData();
 
-        var flight_plan_height = 50;
-        var flight_path_point_data = [];
+        const flight_plan_height = 50;
+        const flight_path_point_data = [];
 
-        var tempDatas = []
-        var humidityDatas = []
-        var pm25Datas = []
-        var coDatas = []
-        
-        var database = firebase.database();
+        const tempDatas = []
+        const humidityDatas = []
+        const pm25Datas = []
+        const coDatas = []
+
+        const database = firebase.database();
 
         function showData(data) {
-            var pm25 = data["pm25"];
-            var no2 = data["no2"];
-            var so2 = data["so2"];
-            var co = data["co"];
-            var o3 = data["o3"];
-            var pm100 = data["pm100"];
-            var temperature = data["temperature"];
-            var humidity = data["humidity"];
-            var data_time = data["time"];
-            var coords = data["coords"];
+            const pm25 = data["pm25"];
+            const no2 = data["no2"];
+            const so2 = data["so2"];
+            const co = data["co"];
+            const o3 = data["o3"];
+            const pm100 = data["pm100"];
+            const temperature = data["temperature"];
+            const humidity = data["humidity"];
+            const data_time = data["time"];
+            const coords = data["coords"];
             tempDatas.push(create2DData(temperature, data_time));
             humidityDatas.push(create2DData(humidity, data_time));
             pm25Datas.push(create2DData(pm25, data_time));
@@ -77,18 +77,18 @@
             chart4.setOption(getFlightData3D(flight_path_point_data));
             chart5.setOption(getAirOption(pm25Datas, coDatas));
         }
-        
+
         function listenFirebaseData() {
-            var ref = database.ref('datas/');
+            const ref = database.ref('datas/');
             ref.on('value', function (snapshot) {
                 showData(snapshot.val());
             });
         }
 
         function createRandomBar3DData() {
-            rbdatas = [];
-            for (var i = 0; i < 5; i++) {
-                for (var j = 0; j < 10; j++) {
+            const rbdatas = [];
+            for (let i = 0; i < 5; i++) {
+                for (let j = 0; j < 10; j++) {
                     rbdatas.push([i, j, getRandom(0, 30)])
                 }
             }
@@ -110,11 +110,11 @@
         }
 
         // function createNoiseData() {
-        //     var noise = new SimplexNoise(Math.random);
-        //     var noise_data = [];
-        //     for (var i = 0; i <= 30; i++) {
-        //         for (var j = 0; j <= 50; j++) {
-        //             var value = noise.noise2D(i / 20, j / 20) * 40 + 40;
+        //     const noise = new SimplexNoise(Math.random);
+        //     const noise_data = [];
+        //     for (const i = 0; i <= 30; i++) {
+        //         for (const j = 0; j <= 50; j++) {
+        //             const value = noise.noise2D(i / 20, j / 20) * 40 + 40;
         //             noise_data.push(value);
         //         }
         //     }
@@ -122,11 +122,11 @@
         // }
 
         function createFlightPointsData(coords, value) {
-            var coord_data = {
-                    name: '',
-                    value: [coords[1], coords[0], flight_plan_height, value],
-                    itemStyle: { 'color': 'white', 'opacity': 0.8, 'borderWidth': 3, 'borderColor': 'green' }
-                }
+            const coord_data = {
+                name: '',
+                value: [coords[1], coords[0], flight_plan_height, value],
+                itemStyle: { 'color': 'white', 'opacity': 0.8, 'borderWidth': 3, 'borderColor': 'green' }
+            }
             return coord_data;
         }
 
@@ -139,7 +139,7 @@
                     trigger: 'axis',
                     formatter: function (params) {
                         params = params[0];
-                        var date = new Date(params.name);
+                        const date = new Date(params.name);
                         return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
                     },
                     axisPointer: {
@@ -375,13 +375,13 @@
         function getAirOption(pm25, co) {
             option = {
                 title: {
-                text: '天氣品質折線圖'
+                    text: '天氣品質折線圖'
                 },
                 tooltip: {
                     trigger: 'axis',
                     formatter: function (params) {
                         params = params[0];
-                        var date = new Date(params.name);
+                        const date = new Date(params.name);
                         return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
                     },
                     axisPointer: {
@@ -391,15 +391,15 @@
                 toolbox: {
                     show: true,
                     feature: {
-                      dataZoom: {
-                        yAxisIndex: 'none'
-                      },
-                      dataView: { readOnly: false },
-                      magicType: { type: ['line', 'bar'] },
-                      restore: {},
-                      saveAsImage: {}
+                        dataZoom: {
+                            yAxisIndex: 'none'
+                        },
+                        dataView: { readOnly: false },
+                        magicType: { type: ['line', 'bar'] },
+                        restore: {},
+                        saveAsImage: {}
                     }
-                  },
+                },
                 xAxis: {
                     type: 'time',
                     splitLine: {
@@ -421,8 +421,8 @@
                     data: pm25,
                     markPoint: {
                         data: [
-                        { type: 'max', name: 'Max' },
-                        { type: 'min', name: 'Min' }
+                            { type: 'max', name: 'Max' },
+                            { type: 'min', name: 'Min' }
                         ]
                     },
                     markLine: {
@@ -435,8 +435,8 @@
                     data: co,
                     markPoint: {
                         data: [
-                        { type: 'max', name: 'Max' },
-                        { type: 'min', name: 'Min' }
+                            { type: 'max', name: 'Max' },
+                            { type: 'min', name: 'Min' }
                         ]
                     },
                     markLine: {
