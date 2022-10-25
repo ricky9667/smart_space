@@ -36,6 +36,7 @@ def create_data():
     co = random.randint(30, 50)
     temperature = random.uniform(20.0, 30.0)
     humidity = random.uniform(60.0, 70.0)
+    uv = random.randint(0, 13)
     currentTime = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
     try:
         coord = coords_data[used_coords_count]
@@ -47,7 +48,7 @@ def create_data():
         used_coords_count = 0
         coord = coords_data[used_coords_count]
 
-    return {'pm25': pm25, 'pm100': pm100, 'o3': o3, 'so2': so2, 'no2': no2, 'co': co, 'temperature': temperature, 'humidity': humidity, 'time': currentTime, 'coords': coord}
+    return {'pm25': pm25, 'pm100': pm100, 'o3': o3, 'so2': so2, 'no2': no2, 'co': co, 'temperature': temperature, 'humidity': humidity, 'uv': uv, 'time': currentTime, 'coords': coord}
 
 while True:
     add(create_data())

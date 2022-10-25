@@ -39,6 +39,7 @@
         const chart3 = echarts.init(document.getElementById('chart3'));
         const chart4 = echarts.init(document.getElementById('chart4'));
         const chart5 = echarts.init(document.getElementById('chart5'));
+        const chart6 = echarts.init(document.getElementById('chart6'));
 
         const currentCoord = [25.043178, 121.533992];
         const currentZoom = 17;
@@ -52,7 +53,12 @@
         const tempDatas = []
         const humidityDatas = []
         const pm25Datas = []
+        const no2Datas = []
+        const so2Datas = []
         const coDatas = []
+        const o3Datas = []
+        const pm100Datas = []
+        const uvDatas = []
 
         const database = firebase.database();
 
@@ -65,17 +71,25 @@
             const pm100 = data["pm100"];
             const temperature = data["temperature"];
             const humidity = data["humidity"];
+            const uv = data["uv"];
             const data_time = data["time"];
             const coords = data["coords"];
             tempDatas.push(create2DData(temperature, data_time));
             humidityDatas.push(create2DData(humidity, data_time));
             pm25Datas.push(create2DData(pm25, data_time));
+            no2Datas.push(create2DData(no2, data_time));
+            so2Datas.push(create2DData(so2, data_time));
             coDatas.push(create2DData(co, data_time));
+            o3Datas.push(create2DData(o3, data_time));
+            pm100Datas.push(create2DData(pm100, data_time));
+            uvDatas.push(create2DData(uv, data_time));
             chart1.setOption(getRadarOption([pm25, pm100, o3, co, so2, no2]));
             chart2.setOption(get2DOption(tempDatas, humidityDatas));
+            chart3.setOption(getBar3DOption(createRandomBar3DData()));
             flight_path_point_data.push(createFlightPointsData(coords, pm25));
             chart4.setOption(getFlightData3D(flight_path_point_data));
-            chart5.setOption(getAirOption(pm25Datas, coDatas));
+            chart5.setOption(getAirOption(pm25Datas, no2Datas, so2Datas, coDatas, o3Datas, pm100Datas));
+            chart6.setOption(getUVOption(uvDatas));
         }
 
         function listenFirebaseData() {
@@ -146,7 +160,7 @@
                     max: 100,
                     min: 0,
                     splitLine: {
-                        show: false
+                        show: true
                     }
                 },
                 legend: {
@@ -157,14 +171,32 @@
                     type: 'line',
                     showSymbol: false,
                     hoverAnimation: false,
-                    data: temp_data
+                    data: temp_data,
+                    markPoint: {
+                        data: [
+                            { type: 'max', name: 'Max' },
+                            { type: 'min', name: 'Min' }
+                        ]
+                    },
+                    markLine: {
+                        data: [{ type: 'average', name: 'Avg' }]
+                    }
                 },
                 {
                     name: '濕度',
                     type: 'line',
                     showSymbol: false,
                     hoverAnimation: false,
-                    data: humidity_data
+                    data: humidity_data,
+                    markPoint: {
+                        data: [
+                            { type: 'max', name: 'Max' },
+                            { type: 'min', name: 'Min' }
+                        ]
+                    },
+                    markLine: {
+                        data: [{ type: 'average', name: 'Avg' }]
+                    }
                 }]
             };
         }
@@ -360,10 +392,10 @@
             }
         }
 
-        function getAirOption(pm25, co) {
+        function getAirOption(pm25, no2, so2, co, o3, pm100) {
             option = {
                 title: {
-                    text: '天氣品質折線圖'
+                    text: '空氣品質折線圖'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -376,17 +408,71 @@
                         animation: false
                     }
                 },
-                toolbox: {
-                    show: true,
-                    feature: {
-                        dataZoom: {
-                            yAxisIndex: 'none'
-                        },
-                        dataView: { readOnly: false },
-                        magicType: { type: ['line', 'bar'] },
-                        restore: {},
-                        saveAsImage: {}
+                xAxis: {
+                    type: 'time',
+                    splitLine: {
+                        show: true
                     }
+                },
+                yAxis: {
+                    type: 'value',
+                    boundaryGap: [0, '100%'],
+                    max: 150,
+                    min: 0,
+                    splitLine: {
+                        show: true
+                    }
+                },
+                legend: {
+                    data: ['PM2.5', 'NO2', 'SO2', 'CO', 'O3', 'PM10']
+                },
+                series: [{
+                    name: 'PM2.5',
+                    type: 'line',
+                    data: pm25
+                },
+                {
+                    name: 'NO2',
+                    type: 'line',
+                    data: no2
+                },
+                {
+                    name: 'SO2',
+                    type: 'line',
+                    data: so2
+                },
+                {
+                    name: 'CO',
+                    type: 'line',
+                    data: co
+                },
+                {
+                    name: 'O3',
+                    type: 'line',
+                    data: o3
+                },
+                {
+                    name: 'PM10',
+                    type: 'line',
+                    data: pm100
+                }]
+            };
+            return option
+        }
+
+        function getUVOption(datas) {
+            option = {
+                title: {
+                    text: '紫外線折線圖',
+                    left: '1%'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                grid: {
+                    left: '5%',
+                    right: '15%',
+                    bottom: '10%'
                 },
                 xAxis: {
                     type: 'time',
@@ -397,41 +483,75 @@
                 yAxis: {
                     type: 'value',
                     boundaryGap: [0, '100%'],
-                    max: 100,
+                    max: 13,
                     min: 0,
                     splitLine: {
-                        show: false
+                        show: true
                     }
                 },
-                series: [{
-                    name: 'pm25',
-                    type: 'line',
-                    data: pm25,
-                    markPoint: {
-                        data: [
-                            { type: 'max', name: 'Max' },
-                            { type: 'min', name: 'Min' }
-                        ]
+                visualMap: {
+                    top: 50,
+                    right: 10,
+                    pieces: [
+                    {
+                        gt: 0,
+                        lte: 2,
+                        color: '#93CE07'
                     },
-                    markLine: {
-                        data: [{ type: 'average', name: 'Avg' }]
+                    {
+                        gt: 2,
+                        lte: 5,
+                        color: '#FBDB0F'
+                    },
+                    {
+                        gt: 5,
+                        lte: 7,
+                        color: '#FC7D02'
+                    },
+                    {
+                        gt: 7,
+                        lte: 10,
+                        color: '#FD0100'
+                    },
+                    {
+                        gt: 10,
+                        lte: 13,
+                        color: '#AA069F'
+                    }
+                    ],
+                    outOfRange: {
+                    color: '#999'
                     }
                 },
-                {
-                    name: 'co',
+                series: {
+                    name: 'UV',
                     type: 'line',
-                    data: co,
-                    markPoint: {
-                        data: [
-                            { type: 'max', name: 'Max' },
-                            { type: 'min', name: 'Min' }
-                        ]
-                    },
+                    data: datas,
                     markLine: {
-                        data: [{ type: 'average', name: 'Avg' }]
+                        silent: false,
+                        lineStyle: {
+                            color: '#333'
+                        },
+                        data: [
+                            {
+                            yAxis: 2
+                            },
+                            {
+                            yAxis: 5
+                            },
+                            {
+                            yAxis: 7
+                            },
+                            {
+                            yAxis: 10
+                            },
+                            {
+                            yAxis: 13
+                            }
+                        ]
                     }
-                }]
-            };
+                }
+            }
             return option
         }
 
@@ -442,6 +562,7 @@
         chart3.setOption(getBar3DOption(bar3DData));
         chart4.setOption(getMap3DOption());
         chart4.setOption(getFlightData3D([]));
-        chart5.setOption(getAirOption([], []));
+        chart5.setOption(getAirOption([], [], [], [], [], []));
+        chart6.setOption(getUVOption([]));
     </script>
 </body>
