@@ -7,6 +7,10 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+import { viteObfuscateFile } from 'vite-plugin-obfuscator'
+
 export default defineConfig({
   resolve: {
     alias: {
@@ -47,6 +51,14 @@ export default defineConfig({
     Unocss(),
 
     createHtmlPlugin(),
+
+    viteObfuscateFile({
+      debugProtection: true,
+      debugProtectionInterval: 0,
+      disableConsoleOutput: true,
+      log: false,
+      selfDefending: true,
+    }),
   ],
   build: {
     cssCodeSplit: true,
@@ -59,6 +71,7 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
+        chunkFileNames: 'assets/[name]-[hash].min.js',
         preferConst: true,
         freeze: true,
         minifyInternalExports: true,
@@ -66,8 +79,23 @@ export default defineConfig({
         strict: true,
         compact: true,
         manualChunks(id) {
+          if (id.includes('vue-echarts'))
+            return 'echarts-ui'
+
           if (id.includes('echarts'))
-            return 'echarts'
+            return 'echarts-core'
+
+          if (id.includes('vueuse'))
+            return 'ui-hooks'
+
+          if (id.includes('vue-router'))
+            return 'ui-router'
+
+          if (id.includes('vue'))
+            return 'ui-core'
+
+          if (id.includes('firebase'))
+            return 'firebase'
         },
       },
     },
