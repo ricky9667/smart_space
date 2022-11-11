@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import * as echarts from 'echarts/core'
 import type { EChartsOption } from 'echarts'
+import { GridComponent, LegendComponent, TitleComponent, ToolboxComponent, TooltipComponent } from 'echarts/components'
+import { use } from 'echarts/core'
+import { CanvasRenderer } from 'echarts/renderers'
+import VChart from 'vue-echarts'
 
 interface Props {
   option: EChartsOption
@@ -8,22 +11,16 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const chart = $ref({} as HTMLDivElement)
-let chartInstance: echarts.ECharts
-
-tryOnMounted(() => {
-  chartInstance = echarts.init(chart)
-  chartInstance.setOption(props.option)
-})
-
-console.log(props.option)
-
-watch(props.option, (newOptions) => {
-  if (newOptions)
-    chartInstance.setOption(newOptions)
-})
+use([
+  CanvasRenderer,
+  TitleComponent,
+  TooltipComponent,
+  LegendComponent,
+  GridComponent,
+  ToolboxComponent,
+])
 </script>
 
 <template>
-  <div ref="chart" />
+  <VChart :option="props.option" />
 </template>
