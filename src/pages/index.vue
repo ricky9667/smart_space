@@ -2,7 +2,7 @@
 import type { EChartsOption } from 'echarts'
 import { ref as firebaseRef, getDatabase, onValue } from 'firebase/database'
 import { firebaseApp } from '~/config/firebase'
-import { organizeData } from '~/utils/barData'
+import { organizeData } from '~/data/barData'
 
 let chart1Options = $ref<EChartsOption>({})
 let chart2Options = $ref<EChartsOption>({})
