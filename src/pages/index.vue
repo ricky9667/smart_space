@@ -21,7 +21,20 @@ tryOnMounted(() => {
 </script>
 
 <template>
-  <div px-4 py-4 transform-gpu flex h-screen justify-center relative>
-    <Chart v-for="(option, i) in chartOptions" :key="i" self-center :option="option" />
+  <div transform-gpu h-screen justify-center relative grid gap-4 grid-cols-2 grid-rows-2 class="chart__grid">
+    <Chart v-for="(option, i) in chartOptions" :key="i" min-w-fit self-center max-h-screen :option="option" />
   </div>
 </template>
+
+<style scoped lang="scss">
+.chart {
+  &__grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 40rem), 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  }
+
+  &__min-w {
+    min-width: min(100%, 40rem);
+  }
+}
+</style>

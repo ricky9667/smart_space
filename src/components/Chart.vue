@@ -22,5 +22,5 @@ use([
 </script>
 
 <template>
-  <VChart :option="props.option" mx-4 my-4 />
+  <VChart :option="props.option" max-w-full max-h-full w-auto />
 </template>
