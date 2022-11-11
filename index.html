@@ -26,14 +26,6 @@
 <body class="font-sans dark:text-white dark:bg-hex-121212">
 <noscript>Please enable Javascript !!!</noscript>
 <div id="app"></div>
-<script>
-  (() => {
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-    const setting = localStorage.getItem('color-schema') || 'auto'
-    if (setting === 'dark' || (prefersDark && setting !== 'light'))
-      document.documentElement.classList.toggle('dark', true)
-  })()
-</script>
 <script type="module" src="/src/main.ts"></script>
 </body>
 </html>
