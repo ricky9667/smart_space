@@ -13,15 +13,13 @@
     "@vueuse/core": "^9.5.0",
     "echarts": "^5.4.0",
     "firebase": "^9.14.0",
-    "mapbox-gl": "^2.10.0",
-    "vue": "^3.2.44",
+    "vue": "^3.2.45",
     "vue-echarts": "^6.2.3",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.29.4",
     "@iconify-json/carbon": "^1.1.9",
-    "@types/mapbox-gl": "^2.7.7",
     "@types/node": "^18.11.9",
     "@unocss/reset": "^0.46.4",
     "@vitejs/plugin-vue": "^3.2.0",
@@ -36,6 +34,8 @@
     "unplugin-auto-import": "^0.11.4",
     "unplugin-vue-components": "^0.22.9",
     "vite": "^3.2.3",
+    "vite-plugin-html": "^3.2.0",
+    "vite-plugin-obfuscator": "^1.0.5",
     "vite-plugin-pages": "^0.27.1",
     "vue-tsc": "^1.0.9"
   },
