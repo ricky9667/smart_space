@@ -79,20 +79,20 @@ export default defineConfig({
         strict: true,
         compact: true,
         manualChunks(id) {
-          if (id.includes('vue-echarts'))
-            return 'echarts-ui'
-
-          if (id.includes('echarts'))
-            return 'echarts-core'
-
-          if (id.includes('vueuse'))
-            return 'ui-hooks'
+          if (id.includes('vue'))
+            return 'ui-core'
 
           if (id.includes('vue-router'))
             return 'ui-router'
 
-          if (id.includes('vue'))
-            return 'ui-core'
+          if (id.includes('vueuse'))
+            return 'ui-hooks'
+
+          if (id.includes('echarts'))
+            return 'echarts-core'
+
+          if (id.includes('vue-echarts'))
+            return 'echarts-ui'
 
           if (id.includes('firebase'))
             return 'firebase'
