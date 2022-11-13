@@ -7,10 +7,6 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-import { viteObfuscateFile } from 'vite-plugin-obfuscator'
-
 export default defineConfig({
   resolve: {
     alias: {
@@ -51,14 +47,6 @@ export default defineConfig({
     Unocss(),
 
     createHtmlPlugin(),
-
-    viteObfuscateFile({
-      debugProtection: true,
-      debugProtectionInterval: 0,
-      disableConsoleOutput: true,
-      log: false,
-      selfDefending: true,
-    }),
   ],
   build: {
     cssCodeSplit: true,
