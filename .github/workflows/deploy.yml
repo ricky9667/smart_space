@@ -1,12 +1,15 @@
-name: Deploy
+name: CI
 
 on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -28,9 +31,25 @@ jobs:
       - run: pnpm i --frozen-lockfile
       - run: pnpm build
 
+      - name: Cache built files
+        uses: actions/cache@v3
+        with:
+          path: ./dist
+          key: dist-${{ github.sha }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Restore cached built files
+        uses: actions/cache@v3
+        with:
+          path: ./dist
+          key: dist-${{ github.sha }}
+
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/master'
         with:
           github_token: ${{ secrets.ACCESS_TOKEN }}
           publish_dir: ./dist
