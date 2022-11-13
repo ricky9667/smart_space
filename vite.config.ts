@@ -1,5 +1,5 @@
 import path from 'path'
-import { defineConfig } from 'vite'
+import { defineConfig, splitVendorChunkPlugin } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
 import { createHtmlPlugin } from 'vite-plugin-html'
@@ -46,17 +46,20 @@ export default defineConfig({
     // see unocss.config.ts for config
     Unocss(),
 
+    splitVendorChunkPlugin(),
+
     createHtmlPlugin(),
   ],
+  esbuild: {
+    legalComments: 'none',
+    minifySyntax: true,
+    minifyWhitespace: true,
+    minifyIdentifiers: true,
+    platform: 'browser',
+  },
   build: {
     cssCodeSplit: true,
-    chunkSizeWarningLimit: 100000,
-    minify: 'terser',
-    terserOptions: {
-      format: {
-        comments: false,
-      },
-    },
+    chunkSizeWarningLimit: 50000,
     rollupOptions: {
       output: {
         chunkFileNames: 'assets/[name]-[hash].min.js',
