@@ -5,10 +5,13 @@ import random
 import datetime
 import time
 import json
+import secrets
 from pprint import pprint
 
 KEY_PATH = './firebase.json'
 DATABASE_URL = 'https://smartspace-84906-default-rtdb.firebaseio.com/'
+
+r = secrets.SystemRandom()
 
 cred = credentials.Certificate(KEY_PATH)
 firebase_admin.initialize_app(cred, {
