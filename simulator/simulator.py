@@ -63,5 +63,3 @@ def create_data():
 while True:
     add(create_data())
     time.sleep(1)
-
-print('Done')
