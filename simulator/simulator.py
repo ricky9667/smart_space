@@ -24,7 +24,7 @@ with open(COORDINATES_PATH) as json_file:
 
 used_coordinates_count = 0
 
-def add(data):
+def insert_data(data):
     # timestamp = str(int(time.time() * 1000000))
     ref = db.reference(DATABASE_REFERENCE_PATH)
     ref.set(data)
@@ -61,5 +61,5 @@ def create_data():
     return {'coordinateData': coordinate_data, 'ultravioletData': ultraviolet_data, 'temperatureData': temperature_data, 'waterDepthData': water_depth_data, 'windData': wind_data}
 
 while True:
-    add(create_data())
+    insert_data(create_data())
     time.sleep(1)
