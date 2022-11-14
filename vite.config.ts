@@ -1,15 +1,11 @@
 import path from 'path'
-import { defineConfig } from 'vite'
+import { defineConfig, splitVendorChunkPlugin } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-import { viteObfuscateFile } from 'vite-plugin-obfuscator'
 
 export default defineConfig({
   resolve: {
@@ -50,25 +46,20 @@ export default defineConfig({
     // see unocss.config.ts for config
     Unocss(),
 
-    createHtmlPlugin(),
+    splitVendorChunkPlugin(),
 
-    viteObfuscateFile({
-      debugProtection: true,
-      debugProtectionInterval: 0,
-      disableConsoleOutput: true,
-      log: false,
-      selfDefending: true,
-    }),
+    createHtmlPlugin(),
   ],
+  esbuild: {
+    legalComments: 'none',
+    minifySyntax: true,
+    minifyWhitespace: true,
+    minifyIdentifiers: true,
+    platform: 'browser',
+  },
   build: {
     cssCodeSplit: true,
-    chunkSizeWarningLimit: 100000,
-    minify: 'terser',
-    terserOptions: {
-      format: {
-        comments: false,
-      },
-    },
+    chunkSizeWarningLimit: 50000,
     rollupOptions: {
       output: {
         chunkFileNames: 'assets/[name]-[hash].min.js',
@@ -79,20 +70,20 @@ export default defineConfig({
         strict: true,
         compact: true,
         manualChunks(id) {
-          if (id.includes('vue-echarts'))
-            return 'echarts-ui'
-
-          if (id.includes('echarts'))
-            return 'echarts-core'
-
-          if (id.includes('vueuse'))
-            return 'ui-hooks'
+          if (id.includes('vue'))
+            return 'ui-core'
 
           if (id.includes('vue-router'))
             return 'ui-router'
 
-          if (id.includes('vue'))
-            return 'ui-core'
+          if (id.includes('vueuse'))
+            return 'ui-hooks'
+
+          if (id.includes('echarts'))
+            return 'echarts-core'
+
+          if (id.includes('vue-echarts'))
+            return 'echarts-ui'
 
           if (id.includes('firebase'))
             return 'firebase'
