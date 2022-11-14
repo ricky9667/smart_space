@@ -8,6 +8,8 @@ import secrets
 from pprint import pprint
 
 KEY_PATH = './firebase.json'
+COORDINATES_PATH = 'coordinates.json'
+DATABASE_REFERENCE_PATH = 'datas/'
 DATABASE_URL = 'https://smartspace-84906-default-rtdb.firebaseio.com/'
 
 random = secrets.SystemRandom()
@@ -17,14 +19,14 @@ firebase_admin.initialize_app(cred, {
         'databaseURL': DATABASE_URL
 })
 
-with open('coordinates.json') as json_file:
+with open(COORDINATES_PATH) as json_file:
     coordinates_data = json.load(json_file)
 
 used_coordinates_count = 0
 
 def add(data):
     # timestamp = str(int(time.time() * 1000000))
-    ref = db.reference('datas/')
+    ref = db.reference(DATABASE_REFERENCE_PATH)
     ref.set(data)
     pprint('Send data to db: {}'.format(data))
 
