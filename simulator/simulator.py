@@ -61,5 +61,6 @@ def create_data():
     return {'coordinateData': coordinate_data, 'ultravioletData': ultraviolet_data, 'temperatureData': temperature_data, 'waterDepthData': water_depth_data, 'windData': wind_data}
 
 while True:
-    insert_data(create_data())
+    created_mock_data = create_data()
+    insert_data(created_mock_data)
     time.sleep(1)
