@@ -38,7 +38,7 @@ def create_data():
             used_coordinates_count = 0
         else:
             used_coordinates_count += 1
-    except:
+    except IndexError:
         used_coordinates_count = 0
         coordinate = coordinates_data[used_coordinates_count]
 
