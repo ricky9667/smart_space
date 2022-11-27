@@ -1,14 +1,14 @@
 import type { EChartsOption } from 'echarts'
 import { graphic } from 'echarts'
 
-let base = +new Date(1968, 9, 3)
+const baseDate = new Date(1968, 9, 3)
 const oneDay = 24 * 3600 * 1000
 const date = []
 
 const data = [useRandom(1, 300)]
 
 for (let i = 1; i < 20000; i++) {
-  const now = new Date((base += oneDay))
+  const now = new Date((baseDate.getMilliseconds() + oneDay * i))
   date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'))
   const randomValue = useRandom(-10, 10)
   data.push(Math.round((randomValue + data[i - 1])))
