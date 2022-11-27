@@ -30,9 +30,7 @@ tryOnMounted(() => {
     </p>
   </div>
 
-  <div transform-gpu h-screen justify-center relative grid gap-4 grid-cols-2 grid-rows-2 class="chart__grid">
-    <Chart v-for="(option, i) in chartOptions" :key="i" min-w-fit self-center max-h-screen :option="option" />
-  </div>
+  <Chart v-for="(option, i) in chartOptions" :key="i" min-w-fit h-xs sm:h-lg md:h-xl md:px-4 py-4 :option="option" />
 </template>
 
 <style scoped lang="scss">
