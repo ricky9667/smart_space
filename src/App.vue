@@ -18,7 +18,7 @@ const scrollToElement = (id: string) => {
 
 <template>
   <header h-12 md:h-20 lg:h-28 flex flex-row justify-between items-center gap-2 lg:gap-4 mx-0 class="header">
-    <button mx-8 class="hamburger" :onclick="toggleDrawer">
+    <button mx-4 md:mx-8 class="hamburger" :onclick="toggleDrawer">
       <div class="bar" />
     </button>
 
@@ -29,13 +29,13 @@ const scrollToElement = (id: string) => {
       </h1>
     </div>
 
-    <div />
+    <div w-16 />
   </header>
 
   <nav class="nav-links">
     <img w-20 md:w-28 lg:w-40 mx-auto my-4 md:my-8 src="./assets/login.png">
     <ul text-base md:text-xl font-600 md:font-900 class="nav-list">
-      <li :onclick="onHomeClick">
+      <li :onclick="reloadPage">
         <img w-8 md:w-10 src="./assets/home.png">
         <div>首頁</div>
       </li>
