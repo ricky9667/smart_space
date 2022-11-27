@@ -1,25 +1,11 @@
 import type { EChartsOption } from 'echarts'
+import { generalLineChartOption } from '~/data/common/diagram'
 
 export const uvChartOption: EChartsOption = {
   title: {
     text: '紫外線指數',
   },
-  tooltip: {
-    trigger: 'axis',
-  },
-  legend: {},
-  toolbox: {
-    show: false,
-    feature: {
-      dataZoom: {
-        yAxisIndex: 'none',
-      },
-      dataView: { readOnly: false },
-      magicType: { type: ['line', 'bar'] },
-      restore: {},
-      saveAsImage: {},
-    },
-  },
+  ...generalLineChartOption,
   xAxis: {
     type: 'category',
     boundaryGap: false,
