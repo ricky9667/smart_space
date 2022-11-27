@@ -21,6 +21,15 @@ tryOnMounted(() => {
 </script>
 
 <template>
+  <div my-16 class="info-section">
+    <p text-2xl font-800>
+      適合潛水率：<span inline-block text-8xl font-900>95%</span>
+    </p>
+    <p text-xl font-700 py-2>
+      (低於 80% 不建議下水)
+    </p>
+  </div>
+
   <div transform-gpu h-screen justify-center relative grid gap-4 grid-cols-2 grid-rows-2 class="chart__grid">
     <Chart v-for="(option, i) in chartOptions" :key="i" min-w-fit self-center max-h-screen :option="option" />
   </div>
@@ -36,5 +45,9 @@ tryOnMounted(() => {
   &__min-w {
     min-width: min(100%, 40rem);
   }
+}
+
+.info-section {
+  color: #00619D;
 }
 </style>
