@@ -6,6 +6,13 @@ import options from '~/data'
 
 const chartOptions = $shallowRef<Array<EChartsOption>>(options)
 
+const chartIds = [
+  'uv-chart',
+  'temperature-chart',
+  'ocean-depth-chart',
+  'wind-chart',
+]
+
 const listenFirebaseData = () => {
   const database = getDatabase(firebaseApp)
   const dataRef = firebaseRef(database, 'datas/')
@@ -30,7 +37,7 @@ tryOnMounted(() => {
     </p>
   </div>
 
-  <Chart v-for="(option, i) in chartOptions" :key="i" min-w-fit h-xs sm:h-lg md:h-xl md:px-4 py-4 :option="option" />
+  <Chart v-for="(option, i) in chartOptions" :id="chartIds[i]" :key="i" min-w-fit h-xs sm:h-lg md:h-xl md:px-4 py-4 :option="option" />
 </template>
 
 <style scoped lang="scss">

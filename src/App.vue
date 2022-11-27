@@ -3,6 +3,17 @@ const toggleDrawer = () => {
   const drawer = document.querySelector('.nav-links')
   drawer?.classList.toggle('active')
 }
+
+const reloadPage = () => {
+  location.reload()
+}
+
+const scrollToElement = (id: string) => {
+  const drawer = document.querySelector('.nav-links')
+  drawer?.classList.toggle('active')
+
+  document.getElementById(id)?.scrollIntoView()
+}
 </script>
 
 <template>
@@ -24,27 +35,27 @@ const toggleDrawer = () => {
   <nav class="nav-links">
     <img w-20 md:w-28 lg:w-40 mx-auto my-4 md:my-8 src="./assets/login.png">
     <ul text-base md:text-xl font-600 md:font-900 class="nav-list">
-      <li>
+      <li :onclick="onHomeClick">
         <img w-8 md:w-10 src="./assets/home.png">
         <div>首頁</div>
       </li>
-      <li>
+      <li :onclick="toggleDrawer">
         <img w-8 md:w-10 src="./assets/dark.png">
         <div>深色主題</div>
       </li>
-      <li>
+      <li :onclick="() => scrollToElement('uv-chart')">
         <img w-8 md:w-10 src="./assets/chart.png">
         <div>紫外線指數</div>
       </li>
-      <li>
+      <li :onclick="() => scrollToElement('temperature-chart')">
         <img w-8 md:w-10 src="./assets/chart.png">
         <div>氣溫與水溫</div>
       </li>
-      <li>
+      <li :onclick="() => scrollToElement('ocean-depth-chart')">
         <img w-8 md:w-10 src="./assets/chart.png">
         <div>水下深度</div>
       </li>
-      <li>
+      <li :onclick="() => scrollToElement('wind-chart')">
         <img w-8 md:w-10 src="./assets/chart.png">
         <div>風向與風速</div>
       </li>
