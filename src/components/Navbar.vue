@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 const toggleDrawer = () => {
-  const drawer = document.querySelector('.nav-links')
+  const drawer = document.querySelector('.drawer')
   drawer?.classList.toggle('active')
 }
 </script>
@@ -20,6 +20,7 @@ const toggleDrawer = () => {
 
     <div w-16 />
   </div>
+  <Drawer />
 </template>
 
 <style lang="scss" scoped>
