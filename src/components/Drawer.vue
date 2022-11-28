@@ -1,7 +1,14 @@
 <script lang="ts" setup>
+interface Props {
+  open: boolean
+}
+
+const props = defineProps<Props>()
+
+const drawer = ref({} as HTMLElement)
+
 const toggleDrawer = () => {
-  const drawer = document.querySelector('.drawer')
-  drawer?.classList.toggle('active')
+  drawer.value.classList.toggle('active')
 }
 
 const reloadPage = () => {
@@ -9,15 +16,23 @@ const reloadPage = () => {
 }
 
 const scrollToElement = (id: string) => {
-  const drawer = document.querySelector('.drawer')
-  drawer?.classList.toggle('active')
-
+  drawer.value.classList.remove('active')
   document.getElementById(id)?.scrollIntoView()
 }
+
+watch(
+  () => props.open,
+  (isDrawerOpen) => {
+    if (isDrawerOpen)
+      drawer.value.classList.add('active')
+    else
+      drawer.value.classList.remove('active')
+  },
+)
 </script>
 
 <template>
-  <div class="drawer">
+  <div ref="drawer" class="drawer">
     <img w-20 md:w-28 lg:w-40 mx-auto my-4 md:my-8 src="../assets/login.png" alt="Login">
     <ul text-base md:text-xl font-600 md:font-900 class="drawer-list">
       <li :onclick="reloadPage">
@@ -48,7 +63,7 @@ const scrollToElement = (id: string) => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .drawer {
   display: block;
   position: fixed;
@@ -74,4 +89,3 @@ const scrollToElement = (id: string) => {
   padding: .2rem 0 .2rem 2rem;
 }
 </style>
-

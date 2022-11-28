@@ -1,7 +1,11 @@
 <script lang="ts" setup>
+const isDrawerOpen = ref(false)
+
 const toggleDrawer = () => {
-  const drawer = document.querySelector('.drawer')
-  drawer?.classList.toggle('active')
+  // const drawer = document.querySelector('.drawer')
+  // drawer?.classList.toggle('active')
+  // drawer.value()
+  isDrawerOpen.value = !isDrawerOpen.value
 }
 </script>
 
@@ -20,7 +24,8 @@ const toggleDrawer = () => {
 
     <div w-16 />
   </div>
-  <Drawer />
+
+  <Drawer :open="isDrawerOpen" />
 </template>
 
 <style lang="scss" scoped>
@@ -59,5 +64,9 @@ const toggleDrawer = () => {
 
 .hamburger.active .bar {
   opacity: 0;
+}
+
+.drawer.active {
+  left: 0;
 }
 </style>
