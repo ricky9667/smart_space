@@ -3,6 +3,11 @@ interface Props {
   open: boolean
 }
 
+interface ChartDrawerItem {
+  id: string
+  name: string
+}
+
 const props = defineProps<Props>()
 
 const drawer = ref({} as HTMLElement)
@@ -15,10 +20,12 @@ const reloadPage = () => {
   location.reload()
 }
 
-const scrollToElement = (id: string) => {
-  drawer.value.classList.remove('active')
-  document.getElementById(id)?.scrollIntoView()
-}
+const chartDrawerItems: Array<ChartDrawerItem> = [
+  { id: 'uv-chart', name: '紫外線指數' },
+  { id: 'temperature-chart', name: '氣溫與水溫' },
+  { id: 'ocean-depth-chart', name: '水下深度' },
+  { id: 'wind-chart', name: '風向與風速' },
+]
 
 watch(
   () => props.open,
@@ -43,22 +50,12 @@ watch(
         <img w-8 md:w-10 src="../assets/dark.png" alt="Dark Mode">
         <div>深色主題</div>
       </li>
-      <li :onclick="() => scrollToElement('uv-chart')">
-        <img w-8 md:w-10 src="../assets/chart.png" alt="UV Chart">
-        <div>紫外線指數</div>
-      </li>
-      <li :onclick="() => scrollToElement('temperature-chart')">
-        <img w-8 md:w-10 src="../assets/chart.png" alt="Temperature Chart">
-        <div>氣溫與水溫</div>
-      </li>
-      <li :onclick="() => scrollToElement('ocean-depth-chart')">
-        <img w-8 md:w-10 src="../assets/chart.png" alt="Ocean Depth Chart">
-        <div>水下深度</div>
-      </li>
-      <li :onclick="() => scrollToElement('wind-chart')">
-        <img w-8 md:w-10 src="../assets/chart.png" alt="Wind Chart">
-        <div>風向與風速</div>
-      </li>
+      <a v-for="drawerItem in chartDrawerItems" :key="drawerItem.id" :href="`#${drawerItem.id}`" :onclick="toggleDrawer">
+        <li>
+          <img w-8 md:w-10 src="../assets/chart.png" :alt="drawerItem.name">
+          <div>{{ drawerItem.name }}</div>
+        </li>
+      </a>
     </ul>
   </div>
 </template>
