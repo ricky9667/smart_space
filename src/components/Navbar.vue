@@ -2,9 +2,6 @@
 const isDrawerOpen = ref(false)
 
 const toggleDrawer = () => {
-  // const drawer = document.querySelector('.drawer')
-  // drawer?.classList.toggle('active')
-  // drawer.value()
   isDrawerOpen.value = !isDrawerOpen.value
 }
 </script>
