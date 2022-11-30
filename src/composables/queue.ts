@@ -18,10 +18,10 @@ export interface Queue<T> {
   clear(): void
 }
 
-export const useQueue = <T>(): Queue<T> => new __QueueImpl<T>()
-export const useQueueWithSize = <T>(size: number): Queue<T> => new __SizeFixedQueue<T>(size)
+export const useQueue = <T>(): Queue<T> => new QueueImpl<T>()
+export const useQueueWithSize = <T>(size: number): Queue<T> => new SizeFixedQueue<T>(size)
 
-class __QueueImpl<T extends NonNullable<any>> implements Queue<T> {
+class QueueImpl<T extends NonNullable<any>> implements Queue<T> {
   #__elements: Array<T>
   #__offset: number
 
@@ -79,11 +79,11 @@ class __QueueImpl<T extends NonNullable<any>> implements Queue<T> {
   }
 
   clone(): Queue<T> {
-    return new __QueueImpl(this.#__elements.slice(this.#__offset))
+    return new QueueImpl(this.#__elements.slice(this.#__offset))
   }
 }
 
-class __SizeFixedQueue<T> extends __QueueImpl<T> {
+class SizeFixedQueue<T> extends QueueImpl<T> {
   readonly #__maxSize: number
 
   constructor(size: number) {
