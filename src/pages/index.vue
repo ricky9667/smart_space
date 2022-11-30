@@ -14,11 +14,11 @@ const chartIds = [
   'wind-chart',
 ]
 
-const flightPathPointDatas: Array<FlightPathPointData> = []
-const ultraVioletDatas: Array<UltraVioletData> = []
-const temperatureDatas: Array<TemperatureData> = []
-const waterDepthDatas: Array<WaterDepthData> = []
-const windDatas: Array<WindData> = []
+const flightPathPointDatas = $ref<Array<FlightPathPointData>>([])
+const ultraVioletDatas = $ref<Array<UltraVioletData>>([])
+const temperatureDatas = $ref<Array<TemperatureData>>([])
+const waterDepthDatas = $ref<Array<WaterDepthData>>([])
+const windDatas = $ref<Array<WindData>>([])
 
 const addCurrentSnapshot = (data: any) => {
   flightPathPointDatas.push({ latitude: data.coordinate.latitude, longitude: data.coordinate.longitude })
