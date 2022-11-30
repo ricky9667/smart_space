@@ -1,4 +1,6 @@
+import type { Unsubscribe } from 'firebase/database'
 import { ref as firebaseRef, getDatabase, onValue } from 'firebase/database'
+import type { Plugin } from 'vue'
 import { firebaseApp } from '~/config/firebase'
 import type {
   ChartData,
@@ -30,7 +32,13 @@ const updateLiveStreamedData = (data?: Readonly<ChartData>) => {
   if (!data)
     return
 
-  const { coordinate, ultraviolet, temperature, water_depth, wind } = data
+  const {
+    coordinate,
+    ultraviolet,
+    temperature,
+    water_depth,
+    wind,
+  } = data
 
   coordinate && flightPathPointData.push(coordinate)
   ultraviolet && ultraVioletData.push(ultraviolet)
@@ -39,13 +47,27 @@ const updateLiveStreamedData = (data?: Readonly<ChartData>) => {
   wind && windData.push(wind)
 }
 
-export const listenFirebaseData = () => {
-  const database = getDatabase(firebaseApp)
-  const dataRef = firebaseRef(database, 'datas/')
+export const liveChartDataListener: Plugin = {
+  install() {
+    const unsubscribeFirebaseData = $ref<Unsubscribe>()
 
-  onValue(dataRef, (snapshot) => {
-    updateLiveStreamedData(snapshot.val() as unknown as ChartData)
-  })
+    const listenFirebaseData = (): Unsubscribe => {
+      const database = getDatabase(firebaseApp)
+      const dataRef = firebaseRef(database, 'datas/')
+
+      return onValue(dataRef, (snapshot) => {
+        updateLiveStreamedData(snapshot.val() as unknown as ChartData)
+      })
+    }
+
+    tryOnMounted(() => {
+      listenFirebaseData()
+    })
+
+    tryOnUnmounted(() => {
+      unsubscribeFirebaseData?.()
+    })
+  },
 }
 
 export const options = $computed(() => [
