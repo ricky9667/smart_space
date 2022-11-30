@@ -1,14 +1,14 @@
 import type { EChartsOption } from 'echarts'
-import { testChart1Option } from '~/data/testChart1'
-import { testChart2Option } from '~/data/testChart2'
-import { testChart3Option } from '~/data/testChart3'
-import { testChart4Option } from '~/data/testChart4'
+import { oceanDepthChartOption } from '~/data/oceanDepthChart'
+import { uvChartOption } from '~/data/uvChart'
+import { temperatureChartOption } from '~/data/temperatureChart'
+import { windChartOption } from '~/data/windChart'
 
 const options: Array<EChartsOption> = [
-  testChart1Option,
-  testChart2Option,
-  testChart3Option,
-  testChart4Option,
+  uvChartOption,
+  temperatureChartOption,
+  oceanDepthChartOption,
+  windChartOption,
 ]
 
 export default options

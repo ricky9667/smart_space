@@ -1,32 +1,23 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import type { EChartsOption } from 'echarts'
-import { ref as firebaseRef, getDatabase, onValue } from 'firebase/database'
-import { firebaseApp } from '~/config/firebase'
 import options from '~/data'
 
 const chartOptions = $shallowRef<Array<EChartsOption>>(options)
 
-const listenFirebaseData = () => {
-  const database = getDatabase(firebaseApp)
-  const dataRef = firebaseRef(database, 'datas/')
-
-  onValue(dataRef, (snapshot) => {
-    // TODO: update chart's options.
-  })
-}
-
-tryOnMounted(() => {
-  listenFirebaseData()
-})
+const chartIds = [
+  'uv-chart',
+  'temperature-chart',
+  'ocean-depth-chart',
+  'wind-chart',
+]
 </script>
 
 <template>
-  <div transform-gpu h-screen justify-center relative grid gap-4 grid-cols-2 grid-rows-2 class="chart__grid">
-    <Chart v-for="(option, i) in chartOptions" :key="i" min-w-fit self-center max-h-screen :option="option" />
-  </div>
+  <Heading />
+  <Chart v-for="(option, i) in chartOptions" :id="chartIds[i]" :key="i" :option="option" h-xs md:h-xl md:px-4 min-w-fit py-4 sm:h-lg />
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .chart {
   &__grid {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 40rem), 1fr));
