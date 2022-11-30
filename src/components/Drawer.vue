@@ -2,12 +2,6 @@
 interface Props {
   open: boolean
 }
-
-interface ChartDrawerItem {
-  id: string
-  name: string
-}
-
 const props = defineProps<Props>()
 
 const drawer = ref({} as HTMLElement)
