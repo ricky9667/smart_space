@@ -75,19 +75,25 @@ watch(
   min-height: 100vh;
   z-index: 99;
   background-color: #c1e7ff;
-  transition: .4s
-}
+  transition: .4s;
 
-.drawer.active {
-  left: 0;
-}
+  &.active {
+    left: 0;
+  }
 
-.drawer-list li {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: .4rem;
-  cursor: pointer;
-  padding: .2rem 0 .2rem 2rem;
+  &-list {
+    li {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: .4rem;
+      cursor: pointer;
+      padding: .2rem 0 .2rem 2rem;
+
+      &:hover {
+        background-color: #fff;
+      }
+    }
+  }
 }
 </style>

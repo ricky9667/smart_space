@@ -38,27 +38,30 @@ const toggleDrawer = () => {
   background: none;
   outline: none;
   border: none;
-}
 
-.hamburger .bar, .hamburger:after, .hamburger:before {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 3px;
-  background-color: #fff;
-  margin: 6px 0px;
-  transition: 0.4s;
-}
+  & .bar, &:after, &:before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #fff;
+    margin: 6px 0;
+    transition: 0.4s;
+  }
 
-.hamburger.active:before {
-  transform: rotate(-45deg) translate(-8px, 6px);
-}
-.hamburger.active:after {
-  transform: rotate(45deg) translate(-9px, -8px);
-}
+  &.active {
+    .bar {
+      opacity: 0;
+    }
 
-.hamburger.active .bar {
-  opacity: 0;
+    &:before {
+      transform: rotate(-45deg) translate(-8px, 6px);
+    }
+
+    &:after {
+      transform: rotate(45deg) translate(-9px, -8px);
+    }
+  }
 }
 
 .drawer.active {
