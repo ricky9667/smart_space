@@ -6,25 +6,25 @@ import { getWindChartOption } from '~/data/windChart'
 import { getUltraVioletChartOption } from '~/data/uvChart'
 import { getTemperatureChartOption } from '~/data/temperatureChart'
 
-// firebase datas
-const flightPathPointDatas = $ref<Array<FlightPathPointData>>([])
-const ultraVioletDatas = $ref<Array<UltraVioletData>>([])
-const temperatureDatas = $ref<Array<TemperatureData>>([])
-const waterDepthDatas = $ref<Array<WaterDepthData>>([])
-const windDatas = $ref<Array<WindData>>([])
+// firebase data.
+const flightPathPointData = $ref<Array<FlightPathPointData>>([])
+const ultraVioletData = $ref<Array<UltraVioletData>>([])
+const temperatureData = $ref<Array<TemperatureData>>([])
+const waterDepthData = $ref<Array<WaterDepthData>>([])
+const windData = $ref<Array<WindData>>([])
 
 // chart options
-const ultraVioletChartOption = $computed(() => getUltraVioletChartOption(ultraVioletDatas))
-const temperatureChartOption = $computed(() => getTemperatureChartOption(temperatureDatas))
-const oceanDepthChartOption = $computed(() => getOceanDepthChartOption(waterDepthDatas))
-const windChartOption = $computed(() => getWindChartOption(windDatas))
+const ultraVioletChartOption = $computed(() => getUltraVioletChartOption(ultraVioletData))
+const temperatureChartOption = $computed(() => getTemperatureChartOption(temperatureData))
+const oceanDepthChartOption = $computed(() => getOceanDepthChartOption(waterDepthData))
+const windChartOption = $computed(() => getWindChartOption(windData))
 
 const addCurrentSnapshot = (data: any) => {
-  flightPathPointDatas.push({ latitude: data.coordinate.latitude, longitude: data.coordinate.longitude })
-  ultraVioletDatas.push({ amount: data.ultraviolet.amount, time: data.ultraviolet.time })
-  temperatureDatas.push(data.temperature)
-  waterDepthDatas.push({ depth: data.water_depth.value, time: data.water_depth.time })
-  windDatas.push({ direction: data.wind.direction, speed: data.wind.speed })
+  flightPathPointData.push({ latitude: data.coordinate.latitude, longitude: data.coordinate.longitude })
+  ultraVioletData.push({ amount: data.ultraviolet.amount, time: data.ultraviolet.time })
+  temperatureData.push(data.temperature)
+  waterDepthData.push({ depth: data.water_depth.value, time: data.water_depth.time })
+  windData.push({ direction: data.wind.direction, speed: data.wind.speed })
 }
 
 export const listenFirebaseData = () => {

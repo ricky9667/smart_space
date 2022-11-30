@@ -2,7 +2,7 @@ import type { EChartsOption } from 'echarts'
 import type { UltraVioletData } from './chartDataTypes'
 import { generalLineChartOption } from '~/data/common/diagram'
 
-export const getUltraVioletChartOption = (ultraVioletDatas: Array<UltraVioletData>): EChartsOption => {
+export const getUltraVioletChartOption = (ultraVioletData: Array<UltraVioletData>): EChartsOption => {
   return {
     title: {
       text: '紫外線指數',
@@ -11,7 +11,7 @@ export const getUltraVioletChartOption = (ultraVioletDatas: Array<UltraVioletDat
     xAxis: {
       type: 'category',
       boundaryGap: false,
-      data: ultraVioletDatas.map(data => data.time.toString()),
+      data: ultraVioletData.map(data => data.time.toString()),
     },
     yAxis: {
       type: 'value',
@@ -23,7 +23,7 @@ export const getUltraVioletChartOption = (ultraVioletDatas: Array<UltraVioletDat
         name: '紫外線',
         type: 'line',
         color: '#7c3aed',
-        data: ultraVioletDatas.map(data => data.amount),
+        data: ultraVioletData.map(data => data.amount),
         markPoint: {
           data: [
             { type: 'max', name: 'Max' },

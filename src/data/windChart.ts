@@ -3,8 +3,8 @@ import type { WindData } from '~/data/chartDataTypes'
 
 const directions = ['N', 'NW', 'W', 'SW', 'S', 'SE', 'E', 'NE']
 
-export const getWindChartOption = (windDatas: Array<WindData>): EChartsOption => {
-  const lastWindData: WindData = windDatas.length > 0 ? windDatas[windDatas.length - 1] : { speed: 0, direction: 0 }
+export const getWindChartOption = (windData: Array<WindData>): EChartsOption => {
+  const lastWindData: WindData = windData.length > 0 ? windData[windData.length - 1] : { speed: 0, direction: 0 }
 
   return {
     title: {

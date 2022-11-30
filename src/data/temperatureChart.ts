@@ -2,7 +2,7 @@ import type { EChartsOption } from 'echarts'
 import type { TemperatureData } from './chartDataTypes'
 import { generalLineChartOption } from '~/data/common/diagram'
 
-export const getTemperatureChartOption = (temperatureDatas: Array<TemperatureData>): EChartsOption => {
+export const getTemperatureChartOption = (temperatureData: Array<TemperatureData>): EChartsOption => {
   return {
     title: {
       text: '氣溫與水溫',
@@ -11,7 +11,7 @@ export const getTemperatureChartOption = (temperatureDatas: Array<TemperatureDat
     xAxis: {
       type: 'category',
       boundaryGap: false,
-      data: temperatureDatas.map(data => data.time.toString()),
+      data: temperatureData.map(data => data.time.toString()),
     },
     yAxis: {
       type: 'value',
@@ -24,7 +24,7 @@ export const getTemperatureChartOption = (temperatureDatas: Array<TemperatureDat
         name: '氣溫',
         type: 'line',
         color: '#38bdf8',
-        data: temperatureDatas.map(data => Math.round(data.air * 10) / 10),
+        data: temperatureData.map(data => Math.round(data.air * 10) / 10),
         markPoint: {
           data: [
             { type: 'max', name: 'Max' },
@@ -39,7 +39,7 @@ export const getTemperatureChartOption = (temperatureDatas: Array<TemperatureDat
         name: '水溫',
         type: 'line',
         color: '#2563eb',
-        data: temperatureDatas.map(data => Math.round(data.water * 10) / 10),
+        data: temperatureData.map(data => Math.round(data.water * 10) / 10),
         markPoint: {
           data: [
             { type: 'max', name: 'Max' },
