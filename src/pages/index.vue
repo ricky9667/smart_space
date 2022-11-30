@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { EChartsOption } from 'echarts'
-import { listenFirebaseData, options } from '~/data'
+import { options } from '~/data'
 
 const chartOptions = $shallowRef<Array<EChartsOption>>(options)
 
@@ -10,10 +10,6 @@ const chartIds = [
   'ocean-depth-chart',
   'wind-chart',
 ]
-
-tryOnMounted(() => {
-  listenFirebaseData()
-})
 </script>
 
 <template>
