@@ -27,12 +27,21 @@ export const getTemperatureChartOption = (temperatureData: Array<TemperatureData
         data: temperatureData.map(data => Math.round(data.air * 10) / 10),
         markPoint: {
           data: [
-            { type: 'max', name: 'Max' },
-            { type: 'min', name: 'Min' },
+            {
+              type: 'max',
+              name: 'Max',
+            },
+            {
+              type: 'min',
+              name: 'Min',
+            },
           ],
         },
         markLine: {
-          data: [{ type: 'average', name: 'Avg' }],
+          data: [{
+            type: 'average',
+            name: 'Avg',
+          }],
         },
       },
       {
@@ -42,13 +51,22 @@ export const getTemperatureChartOption = (temperatureData: Array<TemperatureData
         data: temperatureData.map(data => Math.round(data.water * 10) / 10),
         markPoint: {
           data: [
-            { type: 'max', name: 'Max' },
-            { type: 'min', name: 'Min' },
+            {
+              type: 'max',
+              name: 'Max',
+            },
+            {
+              type: 'min',
+              name: 'Min',
+            },
           ],
         },
         markLine: {
           data: [
-            { type: 'average', name: 'Avg' },
+            {
+              type: 'average',
+              name: 'Avg',
+            },
           ],
         },
       },

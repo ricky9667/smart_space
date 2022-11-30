@@ -15,8 +15,7 @@ export const getUltraVioletChartOption = (ultraVioletData: Array<UltraVioletData
     },
     yAxis: {
       type: 'value',
-      axisLabel: {
-      },
+      axisLabel: {},
     },
     series: [
       {
@@ -26,12 +25,21 @@ export const getUltraVioletChartOption = (ultraVioletData: Array<UltraVioletData
         data: ultraVioletData.map(data => data.amount),
         markPoint: {
           data: [
-            { type: 'max', name: 'Max' },
-            { type: 'min', name: 'Min' },
+            {
+              type: 'max',
+              name: 'Max',
+            },
+            {
+              type: 'min',
+              name: 'Min',
+            },
           ],
         },
         markLine: {
-          data: [{ type: 'average', name: 'Avg' }],
+          data: [{
+            type: 'average',
+            name: 'Avg',
+          }],
         },
       },
     ],
