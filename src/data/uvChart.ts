@@ -2,7 +2,7 @@ import type { EChartsOption } from 'echarts'
 import type { UltraVioletData } from './chartDataTypes'
 import { generalLineChartOption } from '~/data/common/diagram'
 
-export const getUltraVioletChartOption = (ultraVioletData: Array<UltraVioletData>): EChartsOption => {
+export const getUltraVioletChartOption = (ultraVioletData: readonly Readonly<UltraVioletData>[]): Readonly<EChartsOption> => {
   return {
     title: {
       text: '紫外線指數',

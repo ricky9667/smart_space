@@ -1,6 +1,7 @@
 import { ref as firebaseRef, getDatabase, onValue } from 'firebase/database'
 import { firebaseApp } from '~/config/firebase'
 import type {
+  ChartData,
   FlightPathPointData,
   TemperatureData,
   UltraVioletData,
@@ -13,11 +14,11 @@ import { getUltraVioletChartOption } from '~/data/uvChart'
 import { getWindChartOption } from '~/data/windChart'
 
 // firebase data.
-const flightPathPointData = $ref<Array<FlightPathPointData>>([])
-const ultraVioletData = $ref<Array<UltraVioletData>>([])
-const temperatureData = $ref<Array<TemperatureData>>([])
-const waterDepthData = $ref<Array<WaterDepthData>>([])
-const windData = $ref<Array<WindData>>([])
+const flightPathPointData = $ref<Array<Readonly<NonNullable<FlightPathPointData>>>>([])
+const ultraVioletData = $ref<Array<Readonly<NonNullable<UltraVioletData>>>>([])
+const temperatureData = $ref<Array<Readonly<NonNullable<TemperatureData>>>>([])
+const waterDepthData = $ref<Array<Readonly<NonNullable<WaterDepthData>>>>([])
+const windData = $ref<Array<Readonly<NonNullable<WindData>>>>([])
 
 // chart options
 const ultraVioletChartOption = $computed(() => getUltraVioletChartOption(ultraVioletData))
@@ -25,24 +26,17 @@ const temperatureChartOption = $computed(() => getTemperatureChartOption(tempera
 const oceanDepthChartOption = $computed(() => getOceanDepthChartOption(waterDepthData))
 const windChartOption = $computed(() => getWindChartOption(windData))
 
-const addCurrentSnapshot = (data: any) => {
-  flightPathPointData.push({
-    latitude: data.coordinate.latitude,
-    longitude: data.coordinate.longitude,
-  })
-  ultraVioletData.push({
-    amount: data.ultraviolet.amount,
-    time: data.ultraviolet.time,
-  })
-  temperatureData.push(data.temperature)
-  waterDepthData.push({
-    depth: data.water_depth.value,
-    time: data.water_depth.time,
-  })
-  windData.push({
-    direction: data.wind.direction,
-    speed: data.wind.speed,
-  })
+const updateLiveStreamedData = (data?: Readonly<ChartData>) => {
+  if (!data)
+    return
+
+  const { coordinate, ultraviolet, temperature, water_depth, wind } = data
+
+  coordinate && flightPathPointData.push(coordinate)
+  ultraviolet && ultraVioletData.push(ultraviolet)
+  temperature && temperatureData.push(temperature)
+  water_depth && waterDepthData.push(water_depth)
+  wind && windData.push(wind)
 }
 
 export const listenFirebaseData = () => {
@@ -50,7 +44,7 @@ export const listenFirebaseData = () => {
   const dataRef = firebaseRef(database, 'datas/')
 
   onValue(dataRef, (snapshot) => {
-    addCurrentSnapshot(snapshot.val())
+    updateLiveStreamedData(snapshot.val() as unknown as ChartData)
   })
 }
 

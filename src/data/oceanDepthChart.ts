@@ -2,7 +2,7 @@ import type { EChartsOption } from 'echarts'
 import { graphic } from 'echarts'
 import type { WaterDepthData } from '~/data/chartDataTypes'
 
-export const getOceanDepthChartOption = (oceanDepthData: Array<WaterDepthData>): EChartsOption => {
+export const getOceanDepthChartOption = (oceanDepthData: readonly Readonly<WaterDepthData>[]): Readonly<EChartsOption> => {
   return {
     tooltip: {
       trigger: 'axis',
@@ -26,7 +26,7 @@ export const getOceanDepthChartOption = (oceanDepthData: Array<WaterDepthData>):
     xAxis: {
       type: 'category',
       boundaryGap: false,
-      data: oceanDepthData.map(data => data.time.toString()),
+      data: oceanDepthData.map(depth => depth.time.toString()),
     },
     yAxis: {
       type: 'value',
@@ -57,7 +57,7 @@ export const getOceanDepthChartOption = (oceanDepthData: Array<WaterDepthData>):
             },
           ]),
         },
-        data: oceanDepthData.map(data => -data.depth),
+        data: oceanDepthData.map(depth => -depth.value),
       },
     ],
   }

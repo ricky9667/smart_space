@@ -15,11 +15,19 @@ export interface TemperatureData {
 }
 
 export interface WaterDepthData {
-  depth: number
+  value: number
   time: Date
 }
 
 export interface WindData {
   direction: number
   speed: number
+}
+
+export interface ChartData {
+  coordinate?: Readonly<FlightPathPointData>
+  ultraviolet?: Readonly<UltraVioletData>
+  temperature?: Readonly<TemperatureData>
+  water_depth?: Readonly<WaterDepthData>
+  wind?: Readonly<WindData>
 }

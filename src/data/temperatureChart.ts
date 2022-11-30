@@ -2,7 +2,7 @@ import type { EChartsOption } from 'echarts'
 import type { TemperatureData } from './chartDataTypes'
 import { generalLineChartOption } from '~/data/common/diagram'
 
-export const getTemperatureChartOption = (temperatureData: Array<TemperatureData>): EChartsOption => {
+export const getTemperatureChartOption = (temperatureData: readonly Readonly<TemperatureData>[]): Readonly<EChartsOption> => {
   return {
     title: {
       text: '氣溫與水溫',
