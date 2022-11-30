@@ -1,10 +1,10 @@
 import type { EChartsOption } from 'echarts'
 import type { WindData } from '~/data/chartDataTypes'
 
+const directions = ['N', 'NW', 'W', 'SW', 'S', 'SE', 'E', 'NE']
+
 export const getWindChartOption = (windDatas: Array<WindData>): EChartsOption => {
-  let windSpeed = 0
-  if (windDatas.length > 0)
-    windSpeed = windDatas[windDatas.length - 1].speed
+  const lastWindData: WindData = windDatas.length > 0 ? windDatas[windDatas.length - 1] : { speed: 0, direction: 0 }
 
   return {
     title: {
@@ -13,16 +13,16 @@ export const getWindChartOption = (windDatas: Array<WindData>): EChartsOption =>
     series: [
       {
         type: 'gauge',
-        startAngle: 180,
-        endAngle: 0,
-        center: ['50%', '75%'],
+        startAngle: 90,
+        endAngle: 450,
+        center: ['50%', '50%'],
         radius: '90%',
         min: 0,
         max: 1,
         splitNumber: 8,
         axisLine: {
           lineStyle: {
-            width: 6,
+            width: 8,
             color: [
               [0.25, '#FF6E76'],
               [0.5, '#FDDD60'],
@@ -59,36 +59,23 @@ export const getWindChartOption = (windDatas: Array<WindData>): EChartsOption =>
           fontSize: 20,
           distance: -60,
           rotate: 'tangential',
-          formatter(value) {
-            if (value === 0.875)
-              return 'Grade A'
-            else if (value === 0.625)
-              return 'Grade B'
-            else if (value === 0.375)
-              return 'Grade C'
-            else if (value === 0.125)
-              return 'Grade D'
-
-            return ''
-          },
+          formatter: (value: number) => (value * 8 === Math.round(value * 8)) ? directions[value * 8] : '',
         },
         title: {
-          offsetCenter: [0, '-10%'],
-          fontSize: 20,
+          offsetCenter: [0, '5%'],
+          fontSize: 24,
         },
         detail: {
-          fontSize: 30,
-          offsetCenter: [0, '-35%'],
+          fontSize: 56,
+          offsetCenter: [0, '-10%'],
           valueAnimation: true,
-          formatter(value) {
-            return `${Math.round(value * 100)}`
-          },
+          formatter: () => `${Math.round(lastWindData.speed * 100) / 100}`,
           color: 'inherit',
         },
         data: [
           {
-            value: 0.7, // should replace with firebase data
-            name: windSpeed.toString(), // should replace with firebase data, can simply show wind speed here
+            value: lastWindData.direction / 360,
+            name: 'km/h',
           },
         ],
       },
