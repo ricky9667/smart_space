@@ -20,13 +20,6 @@ const reloadPage = () => {
   location.reload()
 }
 
-const chartDrawerItems: Array<ChartDrawerItem> = [
-  { id: '#uv-chart', name: '紫外線指數' },
-  { id: '#temperature-chart', name: '氣溫與水溫' },
-  { id: '#ocean-depth-chart', name: '水下深度' },
-  { id: '#wind-chart', name: '風向與風速' },
-]
-
 watch(
   () => props.open,
   (isDrawerOpen) => {
@@ -50,10 +43,28 @@ watch(
         <img w-8 md:w-10 src="../assets/dark.png" alt="Dark Mode">
         <div>深色主題</div>
       </li>
-      <a v-for="drawerItem in chartDrawerItems" :key="drawerItem.id" :href="drawerItem.id" :onclick="toggleDrawer">
+      <a href="#uv-chart" :onclick="toggleDrawer">
         <li>
-          <img w-8 md:w-10 src="../assets/chart.png" :alt="drawerItem.name">
-          <div>{{ drawerItem.name }}</div>
+          <img w-8 md:w-10 src="../assets/chart.png" alt="紫外線指數">
+          <div>紫外線指數</div>
+        </li>
+      </a>
+      <a href="#temperature-chart" :onclick="toggleDrawer">
+        <li>
+          <img w-8 md:w-10 src="../assets/chart.png" alt="氣溫與水溫">
+          <div>氣溫與水溫</div>
+        </li>
+      </a>
+      <a href="#ocean-depth-chart" :onclick="toggleDrawer">
+        <li>
+          <img w-8 md:w-10 src="../assets/chart.png" alt="水下深度">
+          <div>水下深度</div>
+        </li>
+      </a>
+      <a href="#wind-chart" :onclick="toggleDrawer">
+        <li>
+          <img w-8 md:w-10 src="../assets/chart.png" alt="風向與風速">
+          <div>風向與風速</div>
         </li>
       </a>
     </ul>
