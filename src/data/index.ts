@@ -60,11 +60,11 @@ export const liveChartDataListener: Plugin = {
       })
     }
 
-    tryOnMounted(() => {
+    tryOnBeforeMount(() => {
       listenFirebaseData()
     })
 
-    tryOnUnmounted(() => {
+    tryOnBeforeUnmount(() => {
       unsubscribeFirebaseData?.()
     })
   },
