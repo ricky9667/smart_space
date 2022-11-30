@@ -24,7 +24,7 @@ export const getTemperatureChartOption = (temperatureDatas: Array<TemperatureDat
         name: '氣溫',
         type: 'line',
         color: '#38bdf8',
-        data: temperatureDatas.map(data => data.air),
+        data: temperatureDatas.map(data => Math.round(data.air * 10) / 10),
         markPoint: {
           data: [
             { type: 'max', name: 'Max' },
@@ -39,29 +39,16 @@ export const getTemperatureChartOption = (temperatureDatas: Array<TemperatureDat
         name: '水溫',
         type: 'line',
         color: '#2563eb',
-        data: temperatureDatas.map(data => data.water),
+        data: temperatureDatas.map(data => Math.round(data.water * 10) / 10),
         markPoint: {
-          data: [{ name: '周最低', value: -2, xAxis: 1, yAxis: -1.5 }],
+          data: [
+            { type: 'max', name: 'Max' },
+            { type: 'min', name: 'Min' },
+          ],
         },
         markLine: {
           data: [
             { type: 'average', name: 'Avg' },
-            [
-              {
-                symbol: 'none',
-                x: '90%',
-                yAxis: 'max',
-              },
-              {
-                symbol: 'circle',
-                label: {
-                  position: 'start',
-                  formatter: 'Max',
-                },
-                type: 'max',
-                name: '最高点',
-              },
-            ],
           ],
         },
       },

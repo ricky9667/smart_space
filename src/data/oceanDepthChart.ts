@@ -48,17 +48,7 @@ export const getOceanDepthChartOption = (oceanDepthDatas: Array<WaterDepthData>)
       },
       boundaryGap: [0, '100%'],
     },
-    dataZoom: [
-      {
-        type: 'inside',
-        start: 0,
-        end: 10,
-      },
-      {
-        start: 0,
-        end: 10,
-      },
-    ],
+    dataZoom: [],
     series: [
       {
         name: '水深',
@@ -80,7 +70,7 @@ export const getOceanDepthChartOption = (oceanDepthDatas: Array<WaterDepthData>)
             },
           ]),
         },
-        data: oceanDepthDatas.map(data => data.depth), // should replace with firebase data
+        data: oceanDepthDatas.map(data => -data.depth),
       },
     ],
   }
