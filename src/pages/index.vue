@@ -2,7 +2,7 @@
 import type { EChartsOption } from 'echarts'
 import { options } from '~/data'
 
-const chartOptions = $shallowRef<ReadonlyArray<Readonly<EChartsOption>>>(options)
+const chartOptions = $shallowRef<readonly Readonly<EChartsOption>[]>(options)
 
 const chartIds = [
   'uv-chart',
