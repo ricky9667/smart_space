@@ -1,16 +1,14 @@
 <script lang="ts" setup>
-const isDrawerOpen = ref(false)
+let isDrawerOpen = $ref(false)
 
 const toggleDrawer = () => {
-  isDrawerOpen.value = !isDrawerOpen.value
+  isDrawerOpen = !isDrawerOpen
 }
 </script>
 
 <template>
   <div h-12 md:h-20 lg:h-28 flex flex-row justify-between items-center gap-2 lg:gap-4 mx-0 class="header">
-    <button mx-4 md:mx-8 class="hamburger" :onclick="toggleDrawer">
-      <div class="bar" />
-    </button>
+    <button mx-4 md:mx-8 class="hamburger" @click="toggleDrawer" />
 
     <div flex flex-row items-center gap-2>
       <img w-8 md:w-12 lg:w-16 src="../assets/logo.png" alt="Logo">

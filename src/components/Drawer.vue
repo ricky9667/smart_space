@@ -27,37 +27,37 @@ watch(
 
 <template>
   <div ref="drawer" class="drawer">
-    <img w-20 md:w-28 lg:w-40 mx-auto my-4 md:my-8 src="../assets/login.png" alt="Login">
-    <ul text-base md:text-xl font-600 md:font-900 class="drawer-list">
-      <li :onclick="reloadPage">
-        <img w-8 md:w-10 src="../assets/home.png" alt="Home">
+    <img alt="Login" lg:w-40 md:my-8 md:w-28 mx-auto my-4 src="../assets/login.png" w-20>
+    <ul class="drawer-list" font-600 md:font-900 md:text-xl text-base>
+      <li @click.prevent.stop="reloadPage">
+        <img alt="Home" md:w-10 src="../assets/home.png" w-8>
         <div>首頁</div>
       </li>
-      <li :onclick="toggleDrawer">
-        <img w-8 md:w-10 src="../assets/dark.png" alt="Dark Mode">
+      <li @click.prevent.stop="toggleDrawer">
+        <img alt="Dark Mode" md:w-10 src="../assets/dark.png" w-8>
         <div>深色主題</div>
       </li>
-      <a href="#uv-chart" :onclick="toggleDrawer">
+      <a href="#uv-chart" @click="toggleDrawer">
         <li>
-          <img w-8 md:w-10 src="../assets/chart.png" alt="紫外線指數">
+          <img alt="紫外線指數" md:w-10 src="../assets/chart.png" w-8>
           <div>紫外線指數</div>
         </li>
       </a>
-      <a href="#temperature-chart" :onclick="toggleDrawer">
+      <a href="#temperature-chart" @click="toggleDrawer">
         <li>
-          <img w-8 md:w-10 src="../assets/chart.png" alt="氣溫與水溫">
+          <img alt="氣溫與水溫" md:w-10 src="../assets/chart.png" w-8>
           <div>氣溫與水溫</div>
         </li>
       </a>
-      <a href="#ocean-depth-chart" :onclick="toggleDrawer">
+      <a href="#ocean-depth-chart" @click="toggleDrawer">
         <li>
-          <img w-8 md:w-10 src="../assets/chart.png" alt="水下深度">
+          <img alt="水下深度" md:w-10 src="../assets/chart.png" w-8>
           <div>水下深度</div>
         </li>
       </a>
-      <a href="#wind-chart" :onclick="toggleDrawer">
+      <a href="#wind-chart" @click="toggleDrawer">
         <li>
-          <img w-8 md:w-10 src="../assets/chart.png" alt="風向與風速">
+          <img alt="風向與風速" md:w-10 src="../assets/chart.png" w-8>
           <div>風向與風速</div>
         </li>
       </a>
