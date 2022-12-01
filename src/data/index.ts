@@ -16,10 +16,11 @@ import { getUltraVioletChartOption } from '~/data/uvChart'
 import { getWindChartOption } from '~/data/windChart'
 
 const MAX_STORED_CHART_DATA_AMOUNT = 20
-const DEBOUNCE_TIME = 300
+const MAX_STORED_MAP_DATA_AMOUNT = 2000
+const DEBOUNCE_TIME = 100
 
 // firebase data.
-export const flightPathPointData = shallowRef(useQueueWithSize<FlightPathPointData>(MAX_STORED_CHART_DATA_AMOUNT))
+export const flightPathPointData = shallowRef(useQueueWithSize<FlightPathPointData>(MAX_STORED_MAP_DATA_AMOUNT))
 const ultraVioletData = shallowRef(useQueueWithSize<UltraVioletData>(MAX_STORED_CHART_DATA_AMOUNT))
 const temperatureData = shallowRef(useQueueWithSize<TemperatureData>(MAX_STORED_CHART_DATA_AMOUNT))
 const waterDepthData = shallowRef(useQueueWithSize<WaterDepthData>(MAX_STORED_CHART_DATA_AMOUNT))
