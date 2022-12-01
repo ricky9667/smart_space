@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  simulator:
+    image: "xanonymous/smart-space:latest"
+    build:
+      context: .
+    restart: unless-stopped
+    environment:
+      - PATH=/app/.local/bin:$PATH
+    volumes:
+      - .:/app
+    networks:
+      smart-space-internal:
+
+networks:
+  smart-space-internal:
