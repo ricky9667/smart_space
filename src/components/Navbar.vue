@@ -28,7 +28,7 @@ tryOnMounted(() => {
 
 <template>
   <div
-    class="header" fixed flex flex-row gap-2 h-12 items-center justify-between lg:gap-4 lg:h-28 md:h-20 mx-0 w-screen
+    class="header" fixed flex flex-row gap-2 h-12 max-h-12 items-center justify-between lg:gap-4 lg:h-28 lg:max-h-28 md:h-20 md:max-h-20 mx-0 w-screen
     z-10
   >
     <button class="hamburger" md:mx-8 mx-4 @click="toggleDrawer" />
@@ -47,8 +47,6 @@ tryOnMounted(() => {
       >
     </router-link>
   </div>
-
-  <div h-12 lg:h-28 md:h-20 />
 
   <Drawer :open="isDrawerOpen" :toggle-drawer="toggleDrawer" />
 </template>
