@@ -19,7 +19,7 @@ const MAX_STORED_CHART_DATA_AMOUNT = 20
 const DEBOUNCE_TIME = 300
 
 // firebase data.
-const flightPathPointData = shallowRef(useQueueWithSize<FlightPathPointData>(MAX_STORED_CHART_DATA_AMOUNT))
+export const flightPathPointData = shallowRef(useQueueWithSize<FlightPathPointData>(MAX_STORED_CHART_DATA_AMOUNT))
 const ultraVioletData = shallowRef(useQueueWithSize<UltraVioletData>(MAX_STORED_CHART_DATA_AMOUNT))
 const temperatureData = shallowRef(useQueueWithSize<TemperatureData>(MAX_STORED_CHART_DATA_AMOUNT))
 const waterDepthData = shallowRef(useQueueWithSize<WaterDepthData>(MAX_STORED_CHART_DATA_AMOUNT))
