@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+const name = 'drone'
 </script>
 
 <template>
