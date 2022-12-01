@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import {
+  MapboxDrawControl,
   MapboxFullscreenControl,
   MapboxGeolocateControl,
   MapboxMap,
@@ -15,5 +16,6 @@ import { accessT } from '~/config/mapBox'
     <MapboxGeolocateControl />
     <MapboxScaleControl />
     <MapboxFullscreenControl />
+    <MapboxDrawControl />
   </MapboxMap>
 </template>
