@@ -15,4 +15,5 @@ const chartIds = [
 <template>
   <Heading />
   <Chart v-for="(option, i) in chartOptions" :id="chartIds[i]" :key="i" :option="option" h-md sm:h-xl md:h-2xl md:px-4 min-w-fit py-4 my-4 />
+  <Footer />
 </template>
