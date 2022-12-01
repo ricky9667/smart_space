@@ -8,7 +8,6 @@ const props = defineProps<Props>()
 const drawer = ref({} as HTMLElement)
 
 const toggleDrawer = () => {
-  // drawer.value.classList.toggle('active')
   props.toggleDrawer()
 }
 
