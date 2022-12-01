@@ -7,7 +7,7 @@ const toggleDrawer = () => {
 </script>
 
 <template>
-  <div h-12 md:h-20 lg:h-28 flex flex-row justify-between items-center gap-2 lg:gap-4 mx-0 class="header">
+  <div h-12 md:h-20 lg:h-28 fixed w-screen flex z-10 flex-row justify-between items-center gap-2 lg:gap-4 mx-0 class="header">
     <button mx-4 md:mx-8 class="hamburger" @click="toggleDrawer" />
 
     <div flex flex-row items-center gap-2>
@@ -20,7 +20,9 @@ const toggleDrawer = () => {
     <div w-16 />
   </div>
 
-  <Drawer :open="isDrawerOpen" />
+  <div h-12 md:h-20 lg:h-28 />
+
+  <Drawer :open="isDrawerOpen" :toggle-drawer="toggleDrawer" />
 </template>
 
 <style lang="scss" scoped>

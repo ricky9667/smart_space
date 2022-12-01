@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 interface Props {
   open: boolean
+  toggleDrawer: () => void
 }
 const props = defineProps<Props>()
 
 const drawer = ref({} as HTMLElement)
 
 const toggleDrawer = () => {
-  drawer.value.classList.toggle('active')
+  props.toggleDrawer()
 }
 
 const reloadPage = () => {
@@ -27,7 +28,7 @@ watch(
 
 <template>
   <div ref="drawer" class="drawer">
-    <img alt="Login" lg:w-40 md:my-8 md:w-28 mx-auto my-4 src="../assets/login.png" w-20>
+    <img alt="Login" src="../assets/login.png" lg:w-40 md:my-8 md:w-28 mx-auto my-4 w-20>
     <ul class="drawer-list" font-600 md:font-900 md:text-xl text-base>
       <li @click.prevent.stop="reloadPage">
         <img alt="Home" md:w-10 src="../assets/home.png" w-8>
