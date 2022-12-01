@@ -2,7 +2,7 @@ version: '3'
 
 services:
   simulator:
-    image: "xanonymous/smart-space:latest"
+    image: 'xanonymous/smart-space:latest'
     build:
       context: .
     restart: unless-stopped
@@ -11,7 +11,7 @@ services:
     volumes:
       - .:/app
     networks:
-      smart-space-internal:
+      smart-space-internal: null
 
 networks:
-  smart-space-internal:
+  smart-space-internal: null
