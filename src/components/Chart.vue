@@ -6,7 +6,7 @@ import { CanvasRenderer } from 'echarts/renderers'
 import VChart from 'vue-echarts'
 
 interface Props {
-  option: EChartsOption
+  option: Readonly<EChartsOption>
 }
 
 const props = defineProps<Props>()
