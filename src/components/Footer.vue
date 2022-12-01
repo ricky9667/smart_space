@@ -6,7 +6,7 @@
     </div>
     <div text-xs>
       Copyright
-      <b>©</b>
+      <strong>©</strong>
       2022 Smart Space. All rights reserved.
     </div>
   </div>
