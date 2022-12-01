@@ -5,7 +5,6 @@ const router = useRouter()
 const currentRoute = $computed(() => router.currentRoute.value.path)
 
 const droneMapNavigatorImgUrl = $computed(() => {
-  // TODO: preload image.
   if (currentRoute === '/drone')
     return 'https://i.imgur.com/Vdj11Fq.webp'
   else
