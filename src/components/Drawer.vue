@@ -1,13 +1,15 @@
 <script lang="ts" setup>
 interface Props {
   open: boolean
+  toggleDrawer: () => void
 }
 const props = defineProps<Props>()
 
 const drawer = ref({} as HTMLElement)
 
 const toggleDrawer = () => {
-  drawer.value.classList.toggle('active')
+  // drawer.value.classList.toggle('active')
+  props.toggleDrawer()
 }
 
 const reloadPage = () => {

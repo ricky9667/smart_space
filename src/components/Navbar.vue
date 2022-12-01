@@ -20,7 +20,7 @@ const toggleDrawer = () => {
     <div w-16 />
   </div>
 
-  <Drawer :open="isDrawerOpen" />
+  <Drawer :open="isDrawerOpen" :toggle-drawer="toggleDrawer" />
 </template>
 
 <style lang="scss" scoped>
