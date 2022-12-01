@@ -88,7 +88,7 @@ def run_data_generation() -> None:
         data: EnvData = next(generator)
         insert_data(data)
         generated_data_amount += 1
-        time.sleep(1)
+        time.sleep(0.1)
 
 
 def init() -> None:
