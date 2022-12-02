@@ -32,6 +32,9 @@ const temperatureChartOption = $computed(() => getTemperatureChartOption(tempera
 const oceanDepthChartOption = $computed(() => getOceanDepthChartOption(waterDepthData.value.toArray()))
 const windChartOption = $computed(() => getWindChartOption(windData.value.toArray()))
 
+// heading dive percentage
+export let divePercentage = $ref(0)
+
 const updateLiveStreamedData = (data?: Readonly<ChartData>) => {
   if (!data)
     return
@@ -68,6 +71,8 @@ const updateLiveStreamedData = (data?: Readonly<ChartData>) => {
     windData.value.enqueue(wind)
     triggerRef(windData)
   })()
+
+  divePercentage = useRandom(0, 100)
 }
 
 export const liveChartDataListener: Plugin = {

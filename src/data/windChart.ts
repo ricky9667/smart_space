@@ -21,7 +21,7 @@ export const getWindChartOption = (windData: readonly Readonly<WindData>[]): Rea
         startAngle: 90,
         endAngle: 450,
         center: ['50%', '50%'],
-        radius: '90%',
+        radius: '70%',
         min: 0,
         max: 1,
         splitNumber: 8,
