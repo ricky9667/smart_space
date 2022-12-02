@@ -27,7 +27,7 @@ watch(
 </script>
 
 <template>
-  <div ref="drawer" class="drawer">
+  <div shadow-xl ref="drawer" class="drawer">
     <img alt="Login" src="../assets/login.png" lg:w-40 md:my-8 md:w-28 mx-auto my-4 w-20>
     <ul class="drawer-list" font-600 md:font-900 md:text-xl text-base>
       <li @click.prevent.stop="reloadPage">
