@@ -85,6 +85,9 @@ export default defineConfig({
           if (id.includes('vue-echarts'))
             return 'echarts-ui'
 
+          if (id.includes('mapbox'))
+            return 'mapbox-core'
+
           if (id.includes('firebase'))
             return 'firebase'
         },

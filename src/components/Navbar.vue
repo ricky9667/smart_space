@@ -1,26 +1,52 @@
 <script lang="ts" setup>
 let isDrawerOpen = $ref(false)
 
+const router = useRouter()
+const currentRoute = $computed(() => router.currentRoute.value.path)
+
+const droneMapNavigatorImgUrl = $computed(() => {
+  if (currentRoute === '/drone')
+    return 'https://i.imgur.com/Vdj11Fq.webp'
+  else
+    return 'https://i.imgur.com/bmeql98.webp'
+})
+
+let droneMapNavigatorDestination = $ref('')
+const decideDroneMapNavigatorDestination = async () => {
+  await router.isReady()
+  droneMapNavigatorDestination = currentRoute === '/' ? '/drone' : '/'
+}
+
 const toggleDrawer = () => {
   isDrawerOpen = !isDrawerOpen
 }
+
+tryOnMounted(() => {
+  decideDroneMapNavigatorDestination()
+})
 </script>
 
 <template>
-  <div h-12 md:h-20 lg:h-28 fixed w-screen flex z-10 flex-row justify-between items-center gap-2 lg:gap-4 mx-0 class="header">
-    <button mx-4 md:mx-8 class="hamburger" @click="toggleDrawer" />
+  <div
+    class="header" fixed flex flex-row gap-2 h-12 max-h-12 items-center justify-between lg:gap-4 lg:h-28 lg:max-h-28 md:h-20 md:max-h-20 mx-0 w-screen
+    z-10
+  >
+    <button class="hamburger" md:mx-8 mx-4 @click="toggleDrawer" />
 
-    <div flex flex-row items-center gap-2>
-      <img w-8 md:w-12 lg:w-16 src="../assets/logo.png" alt="Logo">
-      <h1 text-white text-xl md:text-3xl font-bold>
+    <div flex flex-row gap-2 items-center>
+      <img alt="Logo" lg:w-16 md:w-12 src="../assets/logo.png" w-8>
+      <h1 font-bold md:text-3xl text-white text-xl>
         超級智慧潛水
       </h1>
     </div>
 
-    <div w-16 />
+    <router-link :to="droneMapNavigatorDestination" h-full max-h-full relative>
+      <img
+        alt="" h-full max-h-full md:p-4 p-1 relative
+        :src="droneMapNavigatorImgUrl" @click="decideDroneMapNavigatorDestination"
+      >
+    </router-link>
   </div>
-
-  <div h-12 md:h-20 lg:h-28 />
 
   <Drawer :open="isDrawerOpen" :toggle-drawer="toggleDrawer" />
 </template>

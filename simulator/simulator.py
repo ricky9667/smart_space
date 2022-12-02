@@ -22,7 +22,8 @@ from config import \
     WATER_DEPTH_RANGE, \
     WIND_DIRECTION_RANGE, \
     WIND_SPEED_RANGE, \
-    EXPECTED_GENERATED_ENV_DATA_AMOUNT
+    EXPECTED_GENERATED_ENV_DATA_AMOUNT, \
+    DATA_UPDATE_INTERVAL_SEC
 from models import Coordinate, Temperature, Ultraviolet, WaterDepth, Wind, EnvData, CoordinateRaw
 
 
@@ -88,7 +89,7 @@ def run_data_generation() -> None:
         data: EnvData = next(generator)
         insert_data(data)
         generated_data_amount += 1
-        time.sleep(1)
+        time.sleep(DATA_UPDATE_INTERVAL_SEC)
 
 
 def init() -> None:
