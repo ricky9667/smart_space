@@ -63,7 +63,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         chunkFileNames: 'assets/[name]-[hash].min.js',
-        preferConst: true,
         freeze: true,
         minifyInternalExports: true,
         sourcemap: false,
